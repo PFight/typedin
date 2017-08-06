@@ -28,7 +28,7 @@
     <TypeScriptCompile Include="src\index.ts" />
     <TypeScriptCompile Include="src\Inject.ts" />
     <TypeScriptCompile Include="src\DiContainer.test.ts" />
-    <TypeScriptCompile Include="src\Injectable.ts" />
+    <TypeScriptCompile Include="src\IHaveContext.ts" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="tsconfig.json" />
