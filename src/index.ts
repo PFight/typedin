@@ -1,3 +1,3 @@
-﻿export * from "./DIRecord";
-export * from "./DIContainer";
+﻿export * from "./DiRecord";
+export * from "./DiContainer";
 export * from "./Inject";

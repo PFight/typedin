@@ -13,7 +13,7 @@ class TestService {
 
 describe('DIContainer', () => {
   it('should return registered value', () => {
-    const context = new Typedin.DIContainer();
+    const context = new Typedin.DiContainer();
     const key = "SomeKey";
     context.register(key, 42);
     expect(context.getValue(key))
@@ -21,7 +21,7 @@ describe('DIContainer', () => {
   });
 
   it('should return registered service', () => {
-    const context = new Typedin.DIContainer();
+    const context = new Typedin.DiContainer();
     const testService = new TestService();
     context.register(ITestService, testService);
     expect(context.getService(ITestService))
@@ -30,15 +30,15 @@ describe('DIContainer', () => {
 
   it('should return registered in parent value', () => {
     const key = "SomeKey";
-    const parentContext = new Typedin.DIContainer();
+    const parentContext = new Typedin.DiContainer();
     parentContext.register(key, 42);
-    const childContext = new Typedin.DIContainer(parentContext);
+    const childContext = new Typedin.DiContainer(parentContext);
 
     expect(childContext.getValue(key))
       .equal(42);
   });
   it('should update timestamp on register', () => {
-    const context = new Typedin.DIContainer();
+    const context = new Typedin.DiContainer();
     const initialTimestamp = context.timestamp;
     const key = "SomeKey";
     context.register(key, 42);
@@ -46,8 +46,8 @@ describe('DIContainer', () => {
       .not.equal(initialTimestamp);
   });
   it('should update timestamp on register in parent context', () => {
-    const parentContext = new Typedin.DIContainer();
-    const childContext = new Typedin.DIContainer(parentContext);
+    const parentContext = new Typedin.DiContainer();
+    const childContext = new Typedin.DiContainer(parentContext);
     const initialChildTimestamp = childContext.timestamp;
 
     parentContext.register("SomeKey", 42);

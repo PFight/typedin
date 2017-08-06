@@ -13,7 +13,7 @@ class TestService {
   }
 }
 
-var GlobalContext: Typedin.DIContainer;
+var GlobalContext: Typedin.DiContainer;
 var fromGlobal = () => GlobalContext; 
 enum MagicValues {
   LifeMeaning
@@ -27,7 +27,7 @@ class TestDIUser {
 
 describe('Inject', () => {
   it('should receive registered service', () => {
-    GlobalContext = new Typedin.DIContainer();
+    GlobalContext = new Typedin.DiContainer();
     const testService = new TestService();
     GlobalContext.register(ITestService, testService);
 
@@ -40,7 +40,7 @@ describe('Inject', () => {
   });
 
   it('should receive registered value', () => {
-    GlobalContext = new Typedin.DIContainer();
+    GlobalContext = new Typedin.DiContainer();
 
     const lifeMeaning = 42;
     GlobalContext.register(MagicValues.LifeMeaning, lifeMeaning);

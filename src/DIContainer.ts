@@ -1,21 +1,21 @@
-﻿import * as Typedin from "./DIRecord";
+﻿import * as Typedin from "./index";
 
 export type TypeOf<T> = Function & { prototype: T };
 
-export class DIContainer {
-  private mParent: DIContainer;
-  private mChildren: DIContainer[] = [];
-  private mMap: Typedin.DIRecord<any, any>[] = [];
+export class DiContainer {
+  private mParent: DiContainer;
+  private mChildren: DiContainer[] = [];
+  private mMap: Typedin.DiRecord<any, any>[] = [];
   private mTimestamp: number = 0;
 
-  public constructor(parent?: DIContainer) {
+  public constructor(parent?: DiContainer) {
     this.parent = parent;
   }
 
-  public register<KeyT, ValueT>(key: KeyT, value: ValueT): Typedin.DIRecord<KeyT, ValueT> {
+  public register<KeyT, ValueT>(key: KeyT, value: ValueT): Typedin.DiRecord<KeyT, ValueT> {
 		var record = this.getRecord<KeyT, ValueT>(key, false);
 		if (!record) {
-			record = new Typedin.DIRecord<KeyT, ValueT>(this, key, value);
+			record = new Typedin.DiRecord<KeyT, ValueT>(this, key, value);
 			this.mMap.push(record);
 		} else {
 			record.value = value;
@@ -24,7 +24,7 @@ export class DIContainer {
     return record;
   }
 
-  public unregister<KeyT>(key: KeyT, checkParents: boolean = false): Typedin.DIRecord<KeyT, any> {
+  public unregister<KeyT>(key: KeyT, checkParents: boolean = false): Typedin.DiRecord<KeyT, any> {
     let record = this.getRecord(key, checkParents);
     if (record) {
       record.container.mMap.splice(record.container.mMap.indexOf(record));
@@ -38,7 +38,7 @@ export class DIContainer {
     this.updateTimestamp();
   }
 
-  public getRecord<KeyT, ValueT>(key: KeyT, allowParentLookup: boolean = true): Typedin.DIRecord<KeyT, ValueT> {
+  public getRecord<KeyT, ValueT>(key: KeyT, allowParentLookup: boolean = true): Typedin.DiRecord<KeyT, ValueT> {
     let record = this.mMap.find(x => x.key == key);
     if (!record && allowParentLookup && this.mParent) {
       record = this.mParent.getRecord<KeyT, ValueT>(key);
@@ -50,10 +50,10 @@ export class DIContainer {
   // Parent-child and timestamp stuff
   // ---------------------------------------
 
-  public get parent(): DIContainer {
+  public get parent(): DiContainer {
     return this.mParent;
   }
-  public set parent(parent: DIContainer) {
+  public set parent(parent: DiContainer) {
     let oldParent = this.mParent;
     this.mParent = parent;
     if (oldParent && parent != oldParent) {
@@ -84,7 +84,7 @@ export class DIContainer {
   // Services and values helpers
   // --------------------------------------
 	
-  public registerService<InterfaceT, ImplT>(interfaceType: InterfaceT, instance: ImplT): Typedin.DIRecord<InterfaceT, ImplT> {
+  public registerService<InterfaceT, ImplT>(interfaceType: InterfaceT, instance: ImplT): Typedin.DiRecord<InterfaceT, ImplT> {
     return this.register(interfaceType, instance);
   }
   public getService<T>(interfaceType: TypeOf<T>): T {

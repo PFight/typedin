@@ -1,12 +1,12 @@
 ﻿import * as Typedin from "./index";
 
-export class DIRecord<KeyT, ValueT> {
+export class DiRecord<KeyT, ValueT> {
   private mKey: KeyT;
   private mValue: ValueT;
   private mTimestamp: number = 0;
-  private mContainer: Typedin.DIContainer;
+  private mContainer: Typedin.DiContainer;
 
-  constructor(container: Typedin.DIContainer, key: KeyT, value: ValueT) {
+  constructor(container: Typedin.DiContainer, key: KeyT, value: ValueT) {
 		this.mKey = key;
 		this.mValue = value;
 	}
@@ -27,7 +27,7 @@ export class DIRecord<KeyT, ValueT> {
 		return this.mTimestamp;
 	}
 
-  get container(): Typedin.DIContainer {
+  get container(): Typedin.DiContainer {
     return this.mContainer;
   }
 }
