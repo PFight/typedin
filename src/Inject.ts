@@ -1,6 +1,10 @@
 ﻿import * as Typedin from "./index";
 
-/** Decorator, that inject value or service from DIContainer. */
+/**
+  * Decorator, that inject value or service from {@link DIContainer} to the class property.
+  * @param context Function, that returns {@link DIContainer} or {@link fromSelf} value.
+  * @param key Unique idenitifier of the value. When injecting services type of the property will be used as a key.
+  */
 export function inject<KeyT>(context: () => Typedin.DiContainer, key?: KeyT) {
   return (target: Object, propKey: string) => {
     let recordKey = key !== undefined ? key
@@ -31,4 +35,9 @@ export function inject<KeyT>(context: () => Typedin.DiContainer, key?: KeyT) {
   }
 }
 
+/**
+ * Simple stub for the first parameter of the {@link inject} decorator, means
+ * that class implements {@link IHaveCOntext} and that context should be received
+ * by calling this.getDiContext().
+ */
 export const fromSelf: () => Typedin.DiContainer = null;

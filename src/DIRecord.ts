@@ -26,6 +26,7 @@ export class DiRecord<KeyT, ValueT> {
 		this.mValue = val;
 	}
 
+  /** Container, where record stored. */
   get container(): Typedin.DiContainer {
     return this.mContainer;
   }
