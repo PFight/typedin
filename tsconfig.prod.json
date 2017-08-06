@@ -1,19 +1,22 @@
 {
 	"compilerOptions": {
 		"target": "es5",
-		"module": "umd",
-		"moduleResolution": "node",
+		"module": "amd",
+    "moduleResolution": "node",
+    "outFile": "lib/typedin.js",
+    "declaration":  true,
 		"emitDecoratorMetadata": true,
 		"experimentalDecorators": true,
     "noEmitHelpers": false,
-    "importHelpers":  false,
 		"lib": [ "es6", "dom" ]
 	},
   "include": [
     "typings/**.*",
     "src/**/*.ts"
   ],
-	"exclude": [
-	],
+  "exclude": [
+    "src/**/*.test.ts",
+    "node_modules"
+  ],
 	"compileOnSave": true
 }

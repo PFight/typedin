@@ -1,10 +1,14 @@
 {
   "name": "typedin",
   "version": "1.0.0",
-  "description": "Simple library for dependency injection in TypeScript.",
+  "description": "Simple yet powerful library for dependency injection in TypeScript.",
   "main": "index.js",
   "scripts": {
-    "test": "mocha -r ts-node/register src/**/*.test.ts"
+    "mocha": "mocha -r ts-node/register src/**/*.test.ts",
+    "compile": "tsc -p tsconfig.json",
+    "test": "npm run compile && npm run mocha",
+    "docs": "typedoc lib/typedin.d.ts --out ./docs/ --tsconfig tsconfig.prod.json --excludePrivate --excludeNotExported --excludePrivate --excludeNotExported --excludeExternals",
+    "build": "tsc -p tsconfig.prod.json && uglifyjs lib/typedin.js -m -c -o lib/typedin.min.js"
   },
   "repository": {
     "type": "git",
@@ -36,6 +40,8 @@
     "chai": "^4.1.1",
     "mocha": "^3.5.0",
     "ts-node": "^3.3.0",
-    "typings": "^2.1.1"
+    "typedoc": "^0.8.0",
+    "typings": "^2.1.1",
+    "uglify-js": "^3.0.27"
   }
 }

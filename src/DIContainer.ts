@@ -145,7 +145,7 @@ export class DiContainer {
    * @param key Value unique identifier
    * @param value Value itself
    */
-  public registerValue<T>(key: string|number, value: T) {
+  public registerValue<T>(key: string | number, value: T): Typedin.DiRecord<string|number, T> {
     return this.register(key, value);
   }
   /**
