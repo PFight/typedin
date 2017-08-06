@@ -1,0 +1,40 @@
+{
+  "name": "typedin",
+  "version": "1.0.0",
+  "description": "Simple library for dependency injection in TypeScript.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PFight/typedin.git"
+  },
+  "keywords": [
+    "di",
+    "typescript",
+    "dependency",
+    "injection\u001b[1;5D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001bDI\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D",
+    "\u001b[3~\u001b[3~\u001b[3~\u001b[3",
+    "TypeScript",
+    "Dependency",
+    "Injection",
+    "Decorators",
+    "Metadata"
+  ],
+  "author": "PFight <PFight77@gmail.com> (https://github.com/PFight)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/PFight/typedin/issues"
+  },
+  "homepage": "https://github.com/PFight/typedin#readme",
+  "dependencies": {
+    "reflect-metadata": "^0.1.10"
+  },
+  "devDependencies": {
+    "chai": "^4.1.1",
+    "mocha": "^3.5.0",
+    "ts-node": "^3.3.0",
+    "typings": "^2.1.1"
+  }
+}

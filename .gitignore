@@ -57,3 +57,8 @@ typings/
 # dotenv environment variables file
 .env
 
+.vs/
+typedin.csproj.user
+*.map
+*.js
+obj/

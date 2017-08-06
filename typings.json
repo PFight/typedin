@@ -1,0 +1,9 @@
+{
+  "globalDependencies": {
+    "mocha": "registry:dt/mocha#2.2.5+20170311011848",
+    "reflect-metadata": "registry:dt/reflect-metadata#0.0.0+20161005184000"
+  },
+  "dependencies": {
+    "chai": "registry:npm/chai#3.5.0+20160723033700"
+  }
+}
