@@ -7,19 +7,18 @@ export function inject<KeyT>(context: () => Typedin.DiContainer, key?: KeyT) {
       : Reflect.getMetadata("design:type", target, propKey);
     let diRecord: Typedin.DiRecord<KeyT, any>;
     let lastContextTimestamp: number;
-    let lastContext: Typedin.DiContainer = context && context();
-    if (lastContext) {
-      diRecord = lastContext.getRecord(recordKey);
-      lastContextTimestamp = lastContext.timestamp;
-    }
+    let lastContext: Typedin.DiContainer;
     const descriptor = {
-      get: function () {
-        if (!context || !context())
+      get: function (this: Typedin.IHaveConext) {
+        let currentContext = context && context() ||
+          this.getDiContext && this.getDiContext();
+        if (!currentContext)
           throw new Error(`Cant inject value: 'context' is not defined in decorator of property '@{propKey}'`);
-        let currentContext = context();
+
         if (!diRecord || 
           currentContext != lastContext ||
-          currentContext.timestamp != lastContextTimestamp) {
+          currentContext.timestamp != lastContextTimestamp)
+        {
           lastContext = currentContext;
           lastContextTimestamp = currentContext.timestamp;
           diRecord = currentContext.getRecord(recordKey);
@@ -31,3 +30,5 @@ export function inject<KeyT>(context: () => Typedin.DiContainer, key?: KeyT) {
     return descriptor as any;
   }
 }
+
+export const fromSelf: () => Typedin.DiContainer = null;
