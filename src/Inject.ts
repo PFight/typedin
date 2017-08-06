@@ -1,22 +1,22 @@
 ﻿import * as Typedin from "./index";
 
 /** Decorator, that inject value or service from DIContainer. */
-function inject(context: Typedin.DIContainer) {
+export function inject<KeyT>(context: () => Typedin.DIContainer, key?: KeyT) {
   return (target: Object, propKey: string) => {
-    if (!context)
-      throw new Error(`Argument 'context' is not defined in decorator of property '@{propKey}'`);
-
-    const propType = Reflect.getMetadata("design:type", target, propKey);
-    let diRecord = context.getRecord(propType);
+    const recordKey = key || Reflect.getMetadata("design:type", target, propKey);
+    let diRecord = context && context() && context().getRecord(recordKey);
     const descriptor = {
       get: function () {
+        if (!context || !context())
+          throw new Error(`Cant inject value: 'context' is not defined in decorator of property '@{propKey}'`);
+
         if (!diRecord) {
-          diRecord = context.getRecord(propType);
+          diRecord = context().getRecord(recordKey);
         }
         return diRecord && diRecord.value;
       }
     };
     Object.defineProperty(target, propKey, descriptor);
-    return descriptor;
+    return descriptor as any;
   }
 }

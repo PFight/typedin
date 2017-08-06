@@ -29,7 +29,8 @@
   },
   "homepage": "https://github.com/PFight/typedin#readme",
   "dependencies": {
-    "reflect-metadata": "^0.1.10"
+    "reflect-metadata": "^0.1.10",
+    "tslib": "^1.7.1"
   },
   "devDependencies": {
     "chai": "^4.1.1",

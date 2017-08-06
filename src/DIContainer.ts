@@ -45,11 +45,11 @@ export class DIContainer {
     return record && record.value;
   }
 
-  public registerValue<T>(key: string, value: T) {
+  public registerValue<T>(key: string|number, value: T) {
     return this.register(key, value);
   }
-  public getValue<T>(key: string, defaultValue?: T): T {
-    let record = this.getRecord<string, T>(key);
+  public getValue<T>(key: string|number, defaultValue?: T): T {
+    let record = this.getRecord<string|number, T>(key);
     return record && record.value || defaultValue;
   }
 }

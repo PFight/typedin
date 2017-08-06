@@ -5,13 +5,13 @@
 		"moduleResolution": "node",
 		"emitDecoratorMetadata": true,
 		"experimentalDecorators": true,
-		"noEmitHelpers": true,
+    "noEmitHelpers": false,
+    "importHelpers":  false,
 		"lib": [ "es6", "dom" ]
 	},
   "include": [
     "typings/**.*",
-    "src/**/*.ts",
-    "test/**/*.ts"
+    "src/**/*.ts"
   ],
 	"exclude": [
 	],

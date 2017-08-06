@@ -22,11 +22,12 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="src\Inject.test.ts" />
     <TypeScriptCompile Include="src\DIContainer.ts" />
     <TypeScriptCompile Include="src\DIRecord.ts" />
     <TypeScriptCompile Include="src\index.ts" />
     <TypeScriptCompile Include="src\Inject.ts" />
-    <TypeScriptCompile Include="test\test.ts" />
+    <TypeScriptCompile Include="src\DIContainer.test.ts" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="tsconfig.json" />
