@@ -62,3 +62,4 @@ typedin.csproj.user
 *.map
 *.js
 obj/
+bin/

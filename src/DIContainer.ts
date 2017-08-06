@@ -1,6 +1,6 @@
 ﻿import * as Typedin from "./DIRecord";
 
-export type ClassConstructor<T> = { new (): T; }
+export type TypeOf<T> = Function & { prototype: T };
 
 export class DIContainer {
   private mParent: DIContainer;
@@ -37,11 +37,11 @@ export class DIContainer {
 	}
 
 	
-  public registerService<T>(interfaceType: ClassConstructor<T>, instance: T): Typedin.DIRecord<ClassConstructor<T>, T> {
+  public registerService<InterfaceT, ImplT>(interfaceType: InterfaceT, instance: ImplT): Typedin.DIRecord<InterfaceT, ImplT> {
     return this.register(interfaceType, instance);
   }
-  public getService<T>(interfaceType: ClassConstructor<T>): T {
-    let record = this.getRecord <ClassConstructor<T>, T>(interfaceType);
+  public getService<T>(interfaceType: TypeOf<T>): T {
+    let record = this.getRecord<TypeOf<T>, T>(interfaceType);
     return record && record.value;
   }
 
