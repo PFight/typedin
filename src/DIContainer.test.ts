@@ -17,7 +17,7 @@ describe('DIContainer', () => {
     const key = "SomeKey";
     context.register(key, 42);
     expect(context.getValue(key))
-      .to.equal(42);
+      .equal(42);
   });
 
   it('should return registered service', () => {
@@ -25,7 +25,7 @@ describe('DIContainer', () => {
     const testService = new TestService();
     context.register(ITestService, testService);
     expect(context.getService(ITestService))
-      .to.equal(testService);
+      .equal(testService);
   });
 
   it('should return registered in parent value', () => {
@@ -35,7 +35,7 @@ describe('DIContainer', () => {
     const childContext = new Typedin.DIContainer(parentContext);
 
     expect(childContext.getValue(key))
-      .to.equal(42);
+      .equal(42);
   });
   it('should update timestamp on register', () => {
     const context = new Typedin.DIContainer();
@@ -43,7 +43,7 @@ describe('DIContainer', () => {
     const key = "SomeKey";
     context.register(key, 42);
     expect(context.timestamp)
-      .to.not.equal(initialTimestamp);
+      .not.equal(initialTimestamp);
   });
   it('should update timestamp on register in parent context', () => {
     const parentContext = new Typedin.DIContainer();
@@ -53,7 +53,7 @@ describe('DIContainer', () => {
     parentContext.register("SomeKey", 42);
 
     expect(childContext.timestamp)
-      .to.not.equal(initialChildTimestamp);
+      .not.equal(initialChildTimestamp);
   });
 
 });

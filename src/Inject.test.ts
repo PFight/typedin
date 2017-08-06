@@ -34,7 +34,7 @@ describe('Inject', () => {
     const diUser = new TestDIUser();
 
     expect(diUser.testService)
-      .to.equal(testService);
+      .equal(testService);
 
     GlobalContext = null;
   });
@@ -48,7 +48,7 @@ describe('Inject', () => {
     const diUser = new TestDIUser();
 
     expect(diUser.testValue)
-      .to.equal(lifeMeaning);
+      .equal(lifeMeaning);
 
     GlobalContext = null;
   });
