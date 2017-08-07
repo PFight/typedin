@@ -6,34 +6,34 @@ Simple yet powerful dependency injection library for TypeScript
 
 1) Declare interface via abstract class and implement it (no typedin code yet).
 
-    abstract class ILogService {
-        log(message: string);
-    }
-    class ConsoleLogService extends ILogService {
-        log(message: string) {
-            console.info(message);
+        abstract class ILogService {
+            log(message: string);
         }
-    }
+        class ConsoleLogService extends ILogService {
+            log(message: string) {
+                console.info(message);
+            }
+        }
 
 2) Create dependency container and register service in it.
 
-    import { DiContainer } from "typedin";
+        import { DiContainer } from "typedin";
 
-    var GlobalContainer = new DiContainer();
-    GlobalContainer.registerService(ILogService, new ConsoleLogService());
-    var fromGlobal = () => GlobalContainer;
+        var GlobalContainer = new DiContainer();
+        GlobalContainer.registerService(ILogService, new ConsoleLogService());
+        var fromGlobal = () => GlobalContainer;
 
 3) Declare property with decorator `@inject` to get service from container. 
 
-    import {inject} from "typedin";
+        import {inject} from "typedin";
 
-    class SomeComponent {
-        @inject(fromGlobal) logService: ILogService;
+        class SomeComponent {
+            @inject(fromGlobal) logService: ILogService;
 
-		foo() {
-			this.logService.log("Hello there");
-		}
-    }
+		    foo() {
+			    this.logService.log("Hello there");
+		    }
+        }
 
 
 ### More usage examples
