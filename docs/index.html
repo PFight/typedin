@@ -61,7 +61,104 @@
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
 				<h1 id="typedin">typedin</h1>
-				<p>Simple dependency injection for TypeScript</p>
+				<p>Simple yet powerful dependency injection library for TypeScript</p>
+				<h3 id="simple-usage">Simple usage</h3>
+				<p>1) Declare interface via abstract class and implement it (no typedin code yet).</p>
+				<pre><code><span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ILogService</span> </span>{
+    log(message: string);
+}
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ConsoleLogService</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">ILogService</span> </span>{
+    log(message: string) {
+        console.info(message);
+    }
+}
+</code></pre><p>2) Create dependency container and register service in it.</p>
+				<pre><code><span class="hljs-keyword">import</span> { DiContainer } <span class="hljs-keyword">from</span> <span class="hljs-string">"typedin"</span>;
+
+<span class="hljs-keyword">var</span> GlobalContainer = <span class="hljs-keyword">new</span> DiContainer();
+GlobalContainer.registerService(ILogService, <span class="hljs-keyword">new</span> ConsoleLogService());
+<span class="hljs-keyword">var</span> fromGlobal = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> GlobalContainer;
+</code></pre><p>3) Declare property with decorator <code>@inject</code> to get service from container. </p>
+				<pre><code><span class="hljs-keyword">import</span> {inject} from <span class="hljs-string">"typedin"</span>;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SomeComponent</span> </span>{
+    <span class="hljs-meta">@inject(fromGlobal)</span> logService: ILogService;
+
+    foo() {
+        <span class="hljs-keyword">this</span>.logService.log(<span class="hljs-string">"Hello there"</span>);
+    }
+}
+</code></pre><h3 id="more-usage-examples">More usage examples</h3>
+				<h4 id="associate-container-with-object">Associate container with object</h4>
+				<p>You can provide own dynamic logic to determine what container to use. Just implement &#39;IHaveContext&#39; and send <code>fromSelf</code> value to the first parameter of <code>inject</code>.</p>
+				<pre><code><span class="hljs-keyword">import</span> {inject, fromSelf, DiContainer IHaveContext} from <span class="hljs-string">"typedin"</span>;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SomeComponent</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">IHaveContext</span> {</span>
+    <span class="hljs-comment">// fromSelf - use this.getDiContext method to receive context.</span>
+    <span class="hljs-meta">@inject</span>(fromSelf) <span class="hljs-string">logService:</span> ILogService;
+
+    constructor(<span class="hljs-keyword">private</span> <span class="hljs-string">context:</span> DiContainer) {
+    }        
+    getDiContext() {
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.context;
+    }
+}
+</code></pre><p>Another way (the same in internals), but without implementing <code>IHaveContext</code>. Just use <code>setDiContext</code>:</p>
+				<pre><code><span class="hljs-keyword">import</span> {inject, fromSelf, DiContainer, setDiContext} <span class="hljs-keyword">from</span> <span class="hljs-string">"typedin"</span>;
+
+<span class="hljs-keyword">class</span> SomeComponent {
+    <span class="hljs-meta">@inject</span>(fromSelf) logService: ILogService;
+
+    <span class="hljs-keyword">constructor</span>(<span class="hljs-params">context?: DiContainer</span>) {
+        setDiContext(<span class="hljs-keyword">this</span>, context);
+    }
+}
+<span class="hljs-comment">// Or from external</span>
+<span class="hljs-keyword">var</span> someComponent = <span class="hljs-keyword">new</span> SomeComponent();
+setDiContext(someComponent, GlobalContainer);
+</code></pre><h4 id="injecting-values">Injecting values</h4>
+				<p>You can inject any values as well as a services. Key can be any object, that comparable via &#39;==&#39; operator. </p>
+				<pre><code>import {inject, DiContainer} from <span class="hljs-string">"typedin"</span>;
+
+<span class="hljs-class"><span class="hljs-keyword">enum</span> <span class="hljs-title">MagicValues</span> {</span>
+    LifeMeaning
+}
+
+var GlobalContainer = new DiContainer();
+GlobalContext.registerValue(MagicValues.LifeMeaning, <span class="hljs-number">42</span>);
+var fromGlobal = () =&gt; GlobalContainer;
+
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SomeComponent</span> {</span>
+    @inject(fromGlobal, MagicValues.LifeMeaning) <span class="hljs-symbol">lifeMeaning:</span> number;
+}
+</code></pre><h4 id="inheritance-of-the-containers">Inheritance of the containers</h4>
+				<p>Containers can be inherited one from another. If container not found value, it will continue search in parent container. In example we override <code>LifeMeaning</code> value in derived container, but <code>DevilNumber</code> will be received from parent.</p>
+				<pre><code><span class="hljs-keyword">import</span> {inject, DiContainer, fromSelf, seDiContext} <span class="hljs-keyword">from</span> <span class="hljs-string">"typedin"</span>;
+
+<span class="hljs-keyword">enum</span> MagicValues {
+    LifeMeaning,
+    DevilNumber
+}
+
+<span class="hljs-keyword">var</span> GlobalContainer = <span class="hljs-keyword">new</span> DiContainer();
+GlobalContext.registerValue(MagicValues.LifeMeaning, <span class="hljs-number">42</span>);
+GlobalContext.registerValue(MagicValues.DevilNumber, <span class="hljs-number">666</span>);
+<span class="hljs-keyword">var</span> fromGlobal = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> GlobalContainer;
+
+
+<span class="hljs-keyword">class</span> SomeComponent {
+    <span class="hljs-meta">@inject</span>(fromSelf, MagicValues.LifeMeaning) lifeMeaning: <span class="hljs-built_in">number</span>;
+    <span class="hljs-meta">@inject</span>(fromSelf, MagicValues.DevilNumber) devilNumber: <span class="hljs-built_in">number</span>;
+
+    <span class="hljs-keyword">constructor</span>(<span class="hljs-params"></span>) {
+        <span class="hljs-keyword">let</span> myContext = <span class="hljs-keyword">new</span> DiContainer(GlobalContext);
+        myContext.register(MagicValues.LifeMeaning, <span class="hljs-number">24</span>);
+        setDiContext(<span class="hljs-keyword">this</span>, myContext);
+    }
+}
+</code></pre><h4 id="cahcing-and-cache-update">Cahcing and cache update</h4>
+				<p>Injected values are cached after first access. Cache is invalidates when you change something in container, or in some of the parent containers (for example, register new value).</p>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
