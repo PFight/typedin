@@ -3,6 +3,14 @@ Simple yet powerful dependency injection library for TypeScript
 
 [API Reference](https://pfight.github.io/typedin/)
 
+### Installation
+
+With npm:
+
+    npm install typedin --save
+
+Or just include `lib/typedin.min.js` and `lib/typedin.d.ts` to project.
+
 ### Simple usage
 
 1) Declare interface via abstract class and implement it (no typedin code yet).

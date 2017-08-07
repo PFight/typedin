@@ -1,6 +1,6 @@
 {
   "name": "typedin",
-  "version": "1.0.0",
+  "version": "0.9.0",
   "description": "Simple yet powerful library for dependency injection in TypeScript.",
   "main": "index.js",
   "scripts": {
@@ -33,8 +33,7 @@
   },
   "homepage": "https://github.com/PFight/typedin#readme",
   "dependencies": {
-    "reflect-metadata": "^0.1.10",
-    "tslib": "^1.7.1"
+    "reflect-metadata": "^0.1.10"
   },
   "devDependencies": {
     "chai": "^4.1.1",

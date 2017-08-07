@@ -66,10 +66,6 @@ declare module "index" {
 }
 declare module "DiContainer" {
     import * as Typedin from "index";
-    /** You can assign class name itself to variables of this type. */
-    export type TypeOf<T> = Function & {
-        prototype: T;
-    };
     /**
      *  Dependency injection container.
      */
