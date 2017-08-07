@@ -1,6 +1,7 @@
 # typedin
 Simple yet powerful dependency injection library for TypeScript
 
+[API Reference](https://pfight.github.io/typedin/)
 
 ### Simple usage
 
@@ -15,7 +16,7 @@ Simple yet powerful dependency injection library for TypeScript
             }
         }
 
-2) Create and register a service. There we use `Global`, but there are variants (see below).
+2) Create and register a service. There we use {@link Global}, but there are variants (see below).
 
         import { Global } from "typedin";
 
