@@ -11,6 +11,13 @@ With npm:
 
 Or just include `lib/typedin.min.js` and `lib/typedin.d.ts` to project.
 
+In `tsconfig.json` enable next options:
+
+	"compilerOptions": {
+		"emitDecoratorMetadata": true,
+		"experimentalDecorators": true
+    }
+
 #### Dependecies
 
 Library requires [reflect-metadata](https://www.npmjs.com/package/reflect-metadata) polyfill.
