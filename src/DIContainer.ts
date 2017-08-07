@@ -118,44 +118,6 @@ export class DiContainer {
     this.unregisterAll();
     this.parent = null;
   }
-
-  // ======================================
-  // Services and values helpers
-  // --------------------------------------
-
-  /**
-   * Same as {@link register}, but with service semantics.
-   * @param interfaceType Name of the abstract class, that declares service interface.
-   * @param instance Implementation of the interface.
-   */
-  public registerService<InterfaceT, ImplT>(interfaceType: InterfaceT, instance: ImplT): Typedin.DiRecord<InterfaceT, ImplT> {
-    return this.register(interfaceType, instance);
-  }
-  /**
-   * Wrapper of {@link getRecord} with service semantics.
-   * @param interfaceType Name of the abstract class, that declares service interface.
-   * @returns Registered implementation of the interface.
-   */
-  public getService<T>(interfaceType: TypeOf<T>): T {
-    let record = this.getRecord<TypeOf<T>, T>(interfaceType);
-    return record && record.value;
-  }
-  /**
-   * Same as {@link register}, but with value semantics.
-   * @param key Value unique identifier
-   * @param value Value itself
-   */
-  public registerValue<T>(key: string | number, value: T): Typedin.DiRecord<string|number, T> {
-    return this.register(key, value);
-  }
-  /**
-   * Wrapper of {@link getRecord} with value semantics.
-   * @param key Unique key of the value.
-   * @param defaultValue Value, that will be returned if no record found.
-   * @returns Value of the found record or defaultValue, if no record found.
-   */
-  public getValue<T>(key: string|number, defaultValue?: T): T {
-    let record = this.getRecord<string | number, T>(key);
-    return record ? record.value : defaultValue;
-  }
 }
+
+export var Global = new DiContainer();

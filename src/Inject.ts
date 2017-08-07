@@ -1,23 +1,27 @@
 ﻿import * as Typedin from "./index";
 
+const DiContextMetadataKey = "Typedin_DiContext";
+
 /**
-  * Decorator, that inject value or service from {@link DIContainer} to the class property.
-  * @param context Function, that returns {@link DIContainer} or {@link fromSelf} value.
+  * Decorator, that inject value from {@link DIContainer} to the class property.
   * @param key Unique idenitifier of the value. When injecting services type of the property will be used as a key.
   */
-export function inject<KeyT>(context: () => Typedin.DiContainer, key?: KeyT) {
+export function injectThe<KeyT>(key?: KeyT) {
   return (target: Object, propKey: string) => {
     let recordKey = key !== undefined ? key
       : Reflect.getMetadata("design:type", target, propKey);
+    let context;
     let diRecord: Typedin.DiRecord<KeyT, any>;
     let lastContextTimestamp: number;
     let lastContext: Typedin.DiContainer;
     const descriptor = {
       get: function (this: Typedin.IHaveConext) {
-        let currentContext = context && context() ||
-          this.getDiContext && this.getDiContext();
-        if (!currentContext)
-          throw new Error(`Cant inject value: 'context' is not defined in decorator of property '@{propKey}'`);
+        if (context === undefined) {
+          context = Reflect.getMetadata(DiContextMetadataKey, target) as any;
+        }
+        let currentContext = this.getDiContext && this.getDiContext()
+          || context && context()
+          || Typedin.Global;
 
         if (!diRecord || 
           currentContext != lastContext ||
@@ -36,8 +40,22 @@ export function inject<KeyT>(context: () => Typedin.DiContainer, key?: KeyT) {
 }
 
 /**
- * Simple stub for the first parameter of the {@link inject} decorator, means
- * that class implements {@link IHaveCOntext} and that context should be received
- * by calling this.getDiContext().
+ * Decorator, that inject service from {@link DIContainer} to the class property
+ * using property type as a key.
  */
-export const fromSelf: () => Typedin.DiContainer = null;
+export function inject(target: Object, propKey: string) {
+  return injectThe()(target, propKey);
+}
+
+/**
+ * Decorator ,that associates context with a class.
+ * @param context Function, that returns {@link DIContainer}.
+ */
+export function DiContext(context: () => Typedin.DiContainer): any {
+  return (target: Function) => {
+    const classPrototype = target.prototype;
+    Reflect.defineMetadata(DiContextMetadataKey, context, classPrototype);
+    console.info("protype", classPrototype);
+    return target;
+  }
+}

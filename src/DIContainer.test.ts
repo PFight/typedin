@@ -16,7 +16,7 @@ describe('DIContainer', () => {
     const context = new Typedin.DiContainer();
     const key = "SomeKey";
     context.register(key, 42);
-    expect(context.getValue(key))
+    expect(context.getRecord(key).value)
       .equal(42);
   });
 
@@ -24,7 +24,7 @@ describe('DIContainer', () => {
     const context = new Typedin.DiContainer();
     const testService = new TestService();
     context.register(ITestService, testService);
-    expect(context.getService(ITestService))
+    expect(context.getRecord(ITestService).value)
       .equal(testService);
   });
 
@@ -34,7 +34,7 @@ describe('DIContainer', () => {
     parentContext.register(key, 42);
     const childContext = new Typedin.DiContainer(parentContext);
 
-    expect(childContext.getValue(key))
+    expect(childContext.getRecord(key).value)
       .equal(42);
   });
   it('should update timestamp on register', () => {

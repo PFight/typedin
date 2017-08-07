@@ -19,17 +19,20 @@ declare module "DiRecord" {
 declare module "Inject" {
     import * as Typedin from "index";
     /**
-      * Decorator, that inject value or service from {@link DIContainer} to the class property.
-      * @param context Function, that returns {@link DIContainer} or {@link fromSelf} value.
+      * Decorator, that inject value from {@link DIContainer} to the class property.
       * @param key Unique idenitifier of the value. When injecting services type of the property will be used as a key.
       */
-    export function inject<KeyT>(context: () => Typedin.DiContainer, key?: KeyT): (target: Object, propKey: string) => any;
+    export function injectThe<KeyT>(key?: KeyT): (target: Object, propKey: string) => any;
     /**
-     * Simple stub for the first parameter of the {@link inject} decorator, means
-     * that class implements {@link IHaveCOntext} and that context should be received
-     * by calling this.getDiContext().
+     * Decorator, that inject service from {@link DIContainer} to the class property
+     * using property type as a key.
      */
-    export const fromSelf: () => Typedin.DiContainer;
+    export function inject(target: Object, propKey: string): any;
+    /**
+     * Decorator ,that associates context with a class.
+     * @param context Function, that returns {@link DIContainer}.
+     */
+    export function DiContext(context: () => Typedin.DiContainer): any;
 }
 declare module "IHaveContext" {
     import * as Typedin from "index";
@@ -115,30 +118,6 @@ declare module "DiContainer" {
          * Releases all records and removes itself from parent container.
          */
         dispose(): void;
-        /**
-         * Same as {@link register}, but with service semantics.
-         * @param interfaceType Name of the abstract class, that declares service interface.
-         * @param instance Implementation of the interface.
-         */
-        registerService<InterfaceT, ImplT>(interfaceType: InterfaceT, instance: ImplT): Typedin.DiRecord<InterfaceT, ImplT>;
-        /**
-         * Wrapper of {@link getRecord} with service semantics.
-         * @param interfaceType Name of the abstract class, that declares service interface.
-         * @returns Registered implementation of the interface.
-         */
-        getService<T>(interfaceType: TypeOf<T>): T;
-        /**
-         * Same as {@link register}, but with value semantics.
-         * @param key Value unique identifier
-         * @param value Value itself
-         */
-        registerValue<T>(key: string | number, value: T): Typedin.DiRecord<string | number, T>;
-        /**
-         * Wrapper of {@link getRecord} with value semantics.
-         * @param key Unique key of the value.
-         * @param defaultValue Value, that will be returned if no record found.
-         * @returns Value of the found record or defaultValue, if no record found.
-         */
-        getValue<T>(key: string | number, defaultValue?: T): T;
     }
+    export var Global: DiContainer;
 }

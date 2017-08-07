@@ -1,5 +1,5 @@
 ﻿import * as Typedin from "../src/index";
-import { inject, fromSelf } from "../src/index";
+import { inject, injectThe, DiContext } from "../src/index";
 import { expect } from 'chai';
 import "reflect-metadata";
 
@@ -13,35 +13,47 @@ class TestService {
   }
 }
 
-var GlobalContext: Typedin.DiContainer;
-var fromGlobal = () => GlobalContext; 
+
+ 
 enum MagicValues {
   LifeMeaning
 }
 
-
-class TestGlobalDIUser {
-  @inject(fromGlobal) testService: ITestService;
-  @inject(fromGlobal, MagicValues.LifeMeaning) testValue: number;
-}
-
 class TestDIUser {
-  @inject(fromSelf) testService: ITestService;
-  @inject(fromSelf, MagicValues.LifeMeaning) testValue: number;
+  @inject testService: ITestService;
+  @injectThe(MagicValues.LifeMeaning) testValue: number;
 }
+
+var SomeGlobalContext: Typedin.DiContainer;
+@DiContext(() => SomeGlobalContext)
+class TestSomeDIUser {
+  @inject testService: ITestService;
+}
+
 
 describe('Inject', () => {
   it('should receive registered service from global context', () => {
-    GlobalContext = new Typedin.DiContainer();
+    Typedin.Global.unregisterAll();
     const testService = new TestService();
-    GlobalContext.register(ITestService, testService);
-
-    const diUser = new TestGlobalDIUser();
+    Typedin.Global.register(ITestService, testService);
+    const diUser = new TestDIUser();
 
     expect(diUser.testService)
       .equal(testService);
 
-    GlobalContext = null;
+    Typedin.Global.unregisterAll();
+  });
+
+  it('should receive registered service from context, specified by DiContext', () => {
+    SomeGlobalContext = new Typedin.DiContainer();
+    const testService = new TestService();
+    SomeGlobalContext.register(ITestService, testService);
+    const diUser = new TestSomeDIUser();
+
+    expect(diUser.testService)
+      .equal(testService);
+
+    SomeGlobalContext = null;
   });
 
   it('should receive registered service from self context', () => {
