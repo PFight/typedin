@@ -117,3 +117,6 @@ declare module "DiContainer" {
     }
     export var Global: DiContainer;
 }
+declare module "typedin" {
+    export * from "index";
+}

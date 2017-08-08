@@ -63,10 +63,17 @@
 				<h1 id="typedin">typedin</h1>
 				<p>Simple yet powerful dependency injection library for TypeScript</p>
 				<p><a href="https://pfight.github.io/typedin/">API Reference</a></p>
-				<h3 id="installation">Installation</h3>
+				<h4 id="installation">Installation</h4>
 				<p>With npm:</p>
 				<pre><code><span class="hljs-title">npm</span> install typedin <span class="hljs-comment">--save</span>
 </code></pre><p>Or just include <code>lib/typedin.min.js</code> and <code>lib/typedin.d.ts</code> to project.</p>
+				<p>In <code>tsconfig.json</code> enable next options:</p>
+				<pre><code><span class="hljs-attr">"compilerOptions":</span> <span class="hljs-string">{</span>
+<span class="hljs-attr">    "emitDecoratorMetadata":</span> <span class="hljs-literal">true</span><span class="hljs-string">,</span>
+<span class="hljs-attr">    "experimentalDecorators":</span> <span class="hljs-literal">true</span>
+<span class="hljs-string">}</span>
+</code></pre><h4 id="dependecies">Dependecies</h4>
+				<p>Library requires <a href="https://www.npmjs.com/package/reflect-metadata">reflect-metadata</a> polyfill.</p>
 				<h3 id="simple-usage">Simple usage</h3>
 				<p>1) Declare interface via abstract class and implement it (no typedin code yet).</p>
 				<pre><code>    <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ILogService</span> </span>{
@@ -212,6 +219,9 @@ setDiContext(obj, myContext);
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/_index_.html">"index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_typedin_.html">"typedin"</a>
 					</li>
 				</ul>
 			</nav>
