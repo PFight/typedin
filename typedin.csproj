@@ -22,6 +22,7 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="src\typedin.ts" />
     <TypeScriptCompile Include="src\Inject.test.ts" />
     <TypeScriptCompile Include="src\DiContainer.ts" />
     <TypeScriptCompile Include="src\DiRecord.ts" />

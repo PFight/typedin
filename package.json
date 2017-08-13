@@ -1,6 +1,6 @@
 {
   "name": "typedin",
-  "version": "0.9.2",
+  "version": "1.0.0",
   "description": "Simple yet powerful library for dependency injection in TypeScript.",
   "main": "./lib/typedin.min.js",
   "typings": "./lib/typedin.d.ts",
