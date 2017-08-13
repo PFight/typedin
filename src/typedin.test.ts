@@ -1,18 +1,17 @@
-﻿import { injectable, Requires, injectables, bind, to } from "./typedin";
-import { expect } from 'chai';
+﻿import { expect } from 'chai';
 import "reflect-metadata";
 
 // Interfaces
 interface ITestService {
   foo(): string;
 }
-var $ITestService = { testService: injectable<ITestService>() };
-var $LifeMeaning = { lifeMeaning: injectable<number>() };
-var $DevilNumber = { devilNumber: injectable<number>() };
+interface $ITestService { testService: ITestService; };
+interface $LifeMeaning { lifeMeaning: number; };
+interface $DevilNumber { devilNumber: number; };
 
-// Using
+// Users
 class ConstructorInjectionUser {
-  static Requires = injectables($ITestService, $LifeMeaning);
+  static Requires: $ITestService & $LifeMeaning;
   
   constructor(public external: typeof ConstructorInjectionUser.Requires) {
   }
