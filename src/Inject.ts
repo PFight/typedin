@@ -3,7 +3,7 @@
 const DiContextMetadataKey = "Typedin_DiContext";
 
 /**
-  * Decorator, that inject value from {@link DIContainer} to the class property.
+  * Decorator, that inject value from [DIContainer]{@link DIContainer} to the class property.
   * @param key Unique idenitifier of the value. When injecting services type of the property will be used as a key.
   */
 export function injectThe<KeyT>(key?: KeyT) {
@@ -40,7 +40,7 @@ export function injectThe<KeyT>(key?: KeyT) {
 }
 
 /**
- * Decorator, that inject service from {@link DIContainer} to the class property
+ * Decorator, that inject service from [DIContainer]{@link DIContainer} to the class property
  * using property type as a key.
  */
 export function inject(target: Object, propKey: string) {
@@ -49,7 +49,7 @@ export function inject(target: Object, propKey: string) {
 
 /**
  * Decorator ,that associates context with a class.
- * @param context Function, that returns {@link DIContainer}.
+ * @param context Function, that returns [DIContainer]{@link DIContainer}.
  */
 export function DiContext(context: () => Typedin.DiContainer): any {
   return (target: Function) => {

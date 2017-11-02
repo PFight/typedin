@@ -1,11 +1,11 @@
 ﻿import * as Typedin from "./index";
 
 /** 
-  * Interface, that describes a class with associated {@link DiContainer}.
+  * Interface, that describes a class with associated [DiContainer]{@link DiContainer}.
   *
-  * **Note**: You can use {@link setDiContext} function instead of implementing the interface.
+  * **Note**: You can use [setDiContext]{@link setDiContext} function instead of implementing the interface.
   *
-  * **Note**: When some container associated with the object, {@link formSelf} can be used
+  * **Note**: When some container associated with the object, [formSelf]{@link formSelf} can be used
   * as the first parameter of {@inject}.
   */
 export interface IHaveConext {
@@ -14,10 +14,10 @@ export interface IHaveConext {
 }
 
 /**
- * Associates {@link DiContainer} with specified object.
+ * Associates [DiContainer]{@link DiContainer} with specified object.
  *
- * When some container associated with the object, {@link formSelf} can be used
- * as the first parameter of {@inject}.
+ * When some container associated with the object, [formSelf]{@link formSelf} can be used
+ * as the first parameter of [inject]{@link inject}.
  * @param target Object to associate container with.
  * @param context Dependency injection container or function, that returns it.
  */

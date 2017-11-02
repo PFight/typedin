@@ -10,8 +10,8 @@ export class DiContainer {
   private mTimestamp: number = 0;
 
   /**
-   * Initializes instance of {@link DiContainer}
-   * @param parent {@link parent} container
+   * Initializes instance of [DiContainer]{@link DiContainer}
+   * @param [parent]{@link parent} container
    */
   public constructor(parent?: DiContainer) {
     this.parent = parent;
@@ -21,7 +21,7 @@ export class DiContainer {
    * Register or update value for specified key.
    * @param key Key to identify value in container.
    * @param value Value to inject.
-   * @returns Created or existing {@link DiRecord}
+   * @returns Created or existing [DiRecord]{@link DiRecord}
    */
   public register<KeyT, ValueT>(key: KeyT, value: ValueT): Typedin.DiRecord<KeyT, ValueT> {
 		var record = this.getRecord<KeyT, ValueT>(key, false);
@@ -62,7 +62,7 @@ export class DiContainer {
   }
 
   /**
-   * Get registered {@link DiRecord} for specified key.
+   * Get registered [DiRecord]{@link DiRecord} for specified key.
    * @param key Key of the record
    * @param allowParentLookup Should conainer look up to the parents, if no own record found.
    */

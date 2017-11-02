@@ -1,14 +1,14 @@
 declare module "DiRecord" {
     import * as Typedin from "index";
     /**
-     * Record in {@link DiContainer}. Stores key and value.
+     * Record in [DiContainer]{@link DiContainer}. Stores key and value.
      */
     export class DiRecord<KeyT, ValueT> {
         private mKey;
         private mValue;
         private mContainer;
         constructor(container: Typedin.DiContainer, key: KeyT, value: ValueT);
-        /** Key to indetify value in {@link DiContainer} */
+        /** Key to indetify value in [DiContainer]{@link DiContainer} */
         readonly key: KeyT;
         /** Dependency value, that should be injected. */
         value: ValueT;
@@ -19,29 +19,29 @@ declare module "DiRecord" {
 declare module "Inject" {
     import * as Typedin from "index";
     /**
-      * Decorator, that inject value from {@link DIContainer} to the class property.
+      * Decorator, that inject value from [DIContainer]{@link DIContainer} to the class property.
       * @param key Unique idenitifier of the value. When injecting services type of the property will be used as a key.
       */
     export function injectThe<KeyT>(key?: KeyT): (target: Object, propKey: string) => any;
     /**
-     * Decorator, that inject service from {@link DIContainer} to the class property
+     * Decorator, that inject service from [DIContainer]{@link DIContainer} to the class property
      * using property type as a key.
      */
     export function inject(target: Object, propKey: string): any;
     /**
      * Decorator ,that associates context with a class.
-     * @param context Function, that returns {@link DIContainer}.
+     * @param context Function, that returns [DIContainer]{@link DIContainer}.
      */
     export function DiContext(context: () => Typedin.DiContainer): any;
 }
 declare module "IHaveContext" {
     import * as Typedin from "index";
     /**
-      * Interface, that describes a class with associated {@link DiContainer}.
+      * Interface, that describes a class with associated [DiContainer]{@link DiContainer}.
       *
-      * **Note**: You can use {@link setDiContext} function instead of implementing the interface.
+      * **Note**: You can use [setDiContext]{@link setDiContext} function instead of implementing the interface.
       *
-      * **Note**: When some container associated with the object, {@link formSelf} can be used
+      * **Note**: When some container associated with the object, [formSelf]{@link formSelf} can be used
       * as the first parameter of {@inject}.
       */
     export interface IHaveConext {
@@ -49,10 +49,10 @@ declare module "IHaveContext" {
         getDiContext(): Typedin.DiContainer;
     }
     /**
-     * Associates {@link DiContainer} with specified object.
+     * Associates [DiContainer]{@link DiContainer} with specified object.
      *
-     * When some container associated with the object, {@link formSelf} can be used
-     * as the first parameter of {@inject}.
+     * When some container associated with the object, [formSelf]{@link formSelf} can be used
+     * as the first parameter of [inject]{@link inject}.
      * @param target Object to associate container with.
      * @param context Dependency injection container or function, that returns it.
      */
@@ -75,15 +75,15 @@ declare module "DiContainer" {
         private mMap;
         private mTimestamp;
         /**
-         * Initializes instance of {@link DiContainer}
-         * @param parent {@link parent} container
+         * Initializes instance of [DiContainer]{@link DiContainer}
+         * @param [parent]{@link parent} container
          */
         constructor(parent?: DiContainer);
         /**
          * Register or update value for specified key.
          * @param key Key to identify value in container.
          * @param value Value to inject.
-         * @returns Created or existing {@link DiRecord}
+         * @returns Created or existing [DiRecord]{@link DiRecord}
          */
         register<KeyT, ValueT>(key: KeyT, value: ValueT): Typedin.DiRecord<KeyT, ValueT>;
         /**
@@ -98,7 +98,7 @@ declare module "DiContainer" {
          */
         unregisterAll(): void;
         /**
-         * Get registered {@link DiRecord} for specified key.
+         * Get registered [DiRecord]{@link DiRecord} for specified key.
          * @param key Key of the record
          * @param allowParentLookup Should conainer look up to the parents, if no own record found.
          */

@@ -1,7 +1,7 @@
 ﻿import * as Typedin from "./index";
 
 /**
- * Record in {@link DiContainer}. Stores key and value.
+ * Record in [DiContainer]{@link DiContainer}. Stores key and value.
  */
 export class DiRecord<KeyT, ValueT> {
   private mKey: KeyT;
@@ -13,7 +13,7 @@ export class DiRecord<KeyT, ValueT> {
 		this.mValue = value;
 	}
 
-  /** Key to indetify value in {@link DiContainer} */
+  /** Key to indetify value in [DiContainer]{@link DiContainer} */
   get key(): KeyT {
 		return this.mKey;
 	}
