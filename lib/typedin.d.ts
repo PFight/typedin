@@ -41,8 +41,6 @@ declare module "IHaveContext" {
       *
       * **Note**: You can use [setDiContext]{@link setDiContext} function instead of implementing the interface.
       *
-      * **Note**: When some container associated with the object, [formSelf]{@link formSelf} can be used
-      * as the first parameter of {@inject}.
       */
     export interface IHaveConext {
         /** Returns associated dependency injection container. */
@@ -51,8 +49,6 @@ declare module "IHaveContext" {
     /**
      * Associates [DiContainer]{@link DiContainer} with specified object.
      *
-     * When some container associated with the object, [formSelf]{@link formSelf} can be used
-     * as the first parameter of [inject]{@link inject}.
      * @param target Object to associate container with.
      * @param context Dependency injection container or function, that returns it.
      */
